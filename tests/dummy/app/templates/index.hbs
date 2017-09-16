@@ -1,0 +1,20 @@
+<h2>alert test</h2>
+
+<p>
+  value:
+
+  <span class = "route-index-alertValue">
+    {{alertValue}}
+  </span>
+</p>
+
+<button
+  class = "route-index-alertTrigger"
+  {{action (alert
+    message  = (concat "Value will be toggled from " alertValue " to " (not alertValue) ".")
+    labelOk  = 'Yup'
+    actionOk = (toggle 'alertValue' this)
+  )}}
+>
+  Toggle value
+</button>

@@ -1,6 +1,12 @@
 /* eslint-env node */
-'use strict';
+'use strict'
 
 module.exports = {
-  name: 'ember-prompt'
-};
+  name : 'ember-dialogs',
+
+  options : {
+    babel : {
+      plugins : ['transform-object-rest-spread'],
+    },
+  },
+}

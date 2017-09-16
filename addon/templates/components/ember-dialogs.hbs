@@ -1,0 +1,75 @@
+{{#if (and dialogs.message dialogs.backdrop)}}
+  {{liquid-wormhole
+    stack = 'ember-dialogs-backdrop'
+    click = (action 'backdrop')
+
+    class = (concat
+      'ember-dialogs-backdrop '
+      (if dialogs.backdropClickable '-ember-dialogs-clickable ' '')
+    )
+  }}
+{{/if}}
+
+
+
+{{#if dialogs.message}}
+  {{log 'rendering!'}}
+  {{#liquid-tether
+    stack = 'ember-dialogs-dialogTether'
+    class = 'ember-dialogs-dialogTether'
+    value = 'alert'
+
+    target         = 'document.body'
+    targetModifier = 'visible'
+    attachment     = 'middle center'
+  }}
+    {{#if hasBlock}}
+      {{yield (hash
+        message       = dialogs.message
+        type          = dialogs.type
+        labelOk       = (or dialogs.labelOk dialogs.labelOkDefault)
+        labelCancel   = (or dialogs.labelCancel dialogs.labelCancelDefault)
+        actionOk      = (action dialogs.actionOkWrapped)
+        actionCancel  = (action dialogs.actionCancelWrapped)
+        cancelVisible = dialogs.cancelVisible
+      )}}
+    {{else}}{{! hasBlock }}
+      <div class = "ember-dialogs-dialog">
+        <div class = "ember-dialogs-dialog-message">
+          {{dialogs.message}}
+        </div>{{! ember-dialogs-dialog-message }}
+
+        {{#if (eq dialogs.type 'prompt')}}
+          {{input
+            class = ember-dialogs-dialog-input
+            value = userInput
+          }}
+        {{/if}}
+
+        <div class = "ember-dialogs-dialog-buttons">
+          <button
+            class = "ember-dialogs-dialog-button -ember-dialogs-ok"
+            {{action dialogs.actionOkWrapped userInput}}
+          >
+            {{or dialogs.labelOk dialogs.labelOkDefault}}
+          </button>
+
+          {{#if (and
+            (or
+              (eq dialogs.type 'confirm')
+              (eq dialogs.type 'prompt')
+            )
+            dialogs.cancelVisible
+          )}}
+            <button
+              class = "ember-dialogs-dialog-button -ember-dialogs-cancel"
+              {{action dialogs.actionCancelWrapped}}
+            >
+              {{or dialogs.labelCancel dialogs.labelCancelDefault}}
+            </button>
+          {{/if}}
+        </div>{{! ember-dialogs-dialog-buttons }}
+      </div>{{! ember-dialogs-dialog }}
+    {{/if}}{{! hasBlock }}
+  {{/liquid-tether}}
+{{/if}}{{! dialogs.message }}
