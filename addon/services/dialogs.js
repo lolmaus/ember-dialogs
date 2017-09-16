@@ -49,6 +49,9 @@ export default Service.extend({
       labelCancel   = 'Cancel',
       cancelVisible = true,
 
+      value       = '',
+      placeholder = '',
+
       backdrop          = true,
       backdropClickable = true,
 
@@ -67,6 +70,9 @@ export default Service.extend({
       actionCancel,
       labelCancel,
       cancelVisible,
+
+      value,
+      placeholder,
 
       backdrop,
       backdropClickable,
@@ -105,6 +111,9 @@ export default Service.extend({
       actionCancel  : null,
       labelCancel   : null,
       cancelVisible : null,
+
+      value       : null,
+      placeholder : null,
 
       backdrop          : null,
       backdropClickable : null,

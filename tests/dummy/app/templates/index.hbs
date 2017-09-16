@@ -42,3 +42,30 @@
 >
   Toggle value
 </button>
+
+
+
+<h2>prompt test</h2>
+
+<p>
+  value:
+
+  <span class = "route-index-promptValue">
+    {{promptValue}}
+  </span>
+</p>
+
+<button
+  class = "route-index-alertTrigger"
+  {{action (prompt
+    message      = 'Type in a new value'
+    labelOk      = 'Yup'
+    labelCancel  = 'Nah'
+    value        = promptValue
+    placeholder  = 'Please type something'
+
+    actionOk     = (action (mut promptValue))
+  )}}
+>
+  Toggle value
+</button>

@@ -13,6 +13,7 @@ Modal dialogs are driven by [liquid-tether](https://pzuraq.github.io/liquid-teth
 * Use built-in looks or throw in your own.
 * Can be effortlessly animated with `liquid-fire`.
 * Blocks page scrolling while a dialog is active.
+* Prompt supports placeholder and initial value.
 
 
 
@@ -161,7 +162,9 @@ Both methods and helpers accept a single arguments with a hash of values:
 | `actionCancel`      | Closure action, function or null | `null`        | Action to execute when user presses Cancel (not applicable for `alert`).                                     |
 | `labelOk`           | String                           | `'OK'`        | Text to appear on the OK button.                                                                             |
 | `labelCancel`       | String                           | `'Cancel'`    | Text to appear on the Cancel button (not applicable for `alert`).                                            |
-| `cancelVisible`     | Boolean                          | `true`        | Whether to show the Cancel button (not applicable for `alert`).                                              |
+| `cancelVisible`     | Boolean                          | `true`        | Whether to show the Cancel button (applicable only for `prompt`).                                            |
+| `value`             | String                           | `''`          | Initial value for the input of `prompt`.                                                                     |
+| `placeholder`       | String                           | `''`          | Placeholder for the input of `prompt`.                                                                       |
 | `backdrop`          | Boolean                          | `true`        | Whether to render the backdrop.                                                                              |
 | `backdropClickable` | Boolean                          | `true`        | Whether the backdrop triggers an action (`actionOk` for `alert`, `actionCancel` for `confirm` and `prompt` . |
 | `blockScrolling`    | Boolean                          | `true`        | Whether to block page scrolling while the dialog is active.                                                  |

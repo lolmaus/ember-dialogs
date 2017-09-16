@@ -29,8 +29,8 @@
         type          = dialogs.type
         labelOk       = (or dialogs.labelOk dialogs.labelOkDefault)
         labelCancel   = (or dialogs.labelCancel dialogs.labelCancelDefault)
-        actionOk      = (action dialogs.actionOkWrapped)
-        actionCancel  = (action dialogs.actionCancelWrapped)
+        actionOk      = (action 'ok')
+        actionCancel  = (action 'cancel')
         cancelVisible = dialogs.cancelVisible
       )}}
     {{else}}{{! hasBlock }}
@@ -41,15 +41,16 @@
 
         {{#if (eq dialogs.type 'prompt')}}
           {{input
-            class = ember-dialogs-dialog-input
-            value = userInput
+            class       = 'ember-dialogs-dialog-input'
+            value       = userInput
+            placeholder = dialogs.placeholder
           }}
         {{/if}}
 
         <div class = "ember-dialogs-dialog-buttons">
           <button
             class = "ember-dialogs-dialog-button -ember-dialogs-ok"
-            {{action dialogs.actionOkWrapped userInput}}
+            {{action 'ok' userInput}}
           >
             {{dialogs.labelOk}}
           </button>
@@ -63,7 +64,7 @@
           )}}
             <button
               class = "ember-dialogs-dialog-button -ember-dialogs-cancel"
-              {{action dialogs.actionCancelWrapped}}
+              {{action 'cancel'}}
             >
               {{dialogs.labelCancel}}
             </button>

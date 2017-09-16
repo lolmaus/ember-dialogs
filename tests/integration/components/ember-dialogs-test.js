@@ -195,6 +195,7 @@ test('confirm', withChai(async function (expect) {
   expect($('.ember-dialogs-dialog-button.-ember-dialogs-cancel').text().trim(), m).equal('Cancel')
 
   run(() => $('.ember-dialogs-dialog-button.-ember-dialogs-cancel').click())
+  await wait()
 
   m = 'value'
   expect(value, m).true
@@ -219,4 +220,46 @@ test('custom button labels', withChai(async function (expect) {
 
   m = 'cancel button text'
   expect($('.ember-dialogs-dialog-button.-ember-dialogs-cancel').text().trim(), m).equal('Nah')
+}))
+
+
+
+test('prompt', withChai(async function (expect) {
+  this.render(hbs`{{ember-dialogs}}`)
+
+  let value = 'hee'
+
+  run(() => {
+    dialogs.prompt({
+      message     : 'lol',
+      placeholder : 'woo',
+      value,
+      actionOk (userInput) { value = userInput },
+    })
+  })
+  await wait()
+
+  m = 'cancel button existence'
+  expect($('.ember-dialogs-dialog-button.-ember-dialogs-cancel'), m).length(1)
+
+  m = 'input existence'
+  expect($('.ember-dialogs-dialog-input'), m).length(1)
+
+  m = 'input placeholder'
+  expect($('.ember-dialogs-dialog-input').attr('placeholder'), m).equal('woo')
+
+  m = 'input initial value'
+  expect($('.ember-dialogs-dialog-input').val(), m).equal('hee')
+
+  run(() => $('.ember-dialogs-dialog-input').val('heeyoo'))
+  await wait()
+
+  run(() => $('.ember-dialogs-dialog-input').change())
+  await wait()
+
+  run(() => $('.ember-dialogs-dialog-button.-ember-dialogs-ok').click())
+  await wait()
+
+  m = 'value'
+  expect(value, m).equal('heeyoo')
 }))
