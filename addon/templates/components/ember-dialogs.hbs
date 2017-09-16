@@ -1,4 +1,4 @@
-{{#if (and dialogs.message dialogs.backdrop)}}
+{{#if (and dialogs.type dialogs.backdrop)}}
   {{liquid-wormhole
     stack = 'ember-dialogs-backdrop'
     click = (action 'backdrop')
@@ -8,12 +8,11 @@
       (if dialogs.backdropClickable '-ember-dialogs-clickable ' '')
     )
   }}
-{{/if}}
+{{/if}}{{! and dialogs.type dialogs.backdrop }}
 
 
 
-{{#if dialogs.message}}
-  {{log 'rendering!'}}
+{{#if dialogs.type}}
   {{#liquid-tether
     stack = 'ember-dialogs-dialogTether'
     class = 'ember-dialogs-dialogTether'
@@ -35,9 +34,12 @@
       )}}
     {{else}}{{! hasBlock }}
       <div class = "ember-dialogs-dialog">
-        <div class = "ember-dialogs-dialog-message">
-          {{dialogs.message}}
-        </div>{{! ember-dialogs-dialog-message }}
+
+        {{#if dialogs.message}}
+          <div class = "ember-dialogs-dialog-message">
+            {{dialogs.message}}
+          </div>{{! ember-dialogs-dialog-message }}
+        {{/if}}{{! dialogs.message }}
 
         {{#if (eq dialogs.type 'prompt')}}
           {{input
@@ -73,4 +75,4 @@
       </div>{{! ember-dialogs-dialog }}
     {{/if}}{{! hasBlock }}
   {{/liquid-tether}}
-{{/if}}{{! dialogs.message }}
+{{/if}}{{! dialogs.type }}

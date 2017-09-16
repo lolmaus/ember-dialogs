@@ -262,4 +262,17 @@ test('prompt', withChai(async function (expect) {
 
   m = 'value'
   expect(value, m).equal('heeyoo')
+
+  run(() => {
+    dialogs.prompt({
+      message     : 'lol',
+      placeholder : 'woo',
+      value       : 'naa',
+      actionOk (userInput) { value = userInput },
+    })
+  })
+  await wait()
+
+  m = 'input value after second invocation'
+  expect($('.ember-dialogs-dialog-input').val(), m).equal('naa')
 }))

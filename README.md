@@ -157,7 +157,7 @@ Both methods and helpers accept a single arguments with a hash of values:
 
 | Argument            | Type                             | Default value | Description                                                                                                  |
 |:--------------------|:---------------------------------|:--------------|:-------------------------------------------------------------------------------------------------------------|
-| `message`           | Non-empty string                 | <required>    | Text to appear in the dialog.                                                                                |
+| `message`           | String                 | <required>    | Text to appear in the dialog.                                                                                |
 | `actionOk`          | Closure action, function or null | `null`        | Action to execute when user presses OK.                                                                      |
 | `actionCancel`      | Closure action, function or null | `null`        | Action to execute when user presses Cancel (not applicable for `alert`).                                     |
 | `labelOk`           | String                           | `'OK'`        | Text to appear on the OK button.                                                                             |

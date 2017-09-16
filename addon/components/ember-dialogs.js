@@ -2,6 +2,7 @@
 import Component from '@ember/component'
 import { inject as service } from '@ember/service'
 import { reads as writable } from '@ember/object/computed'
+import { defineProperty } from '@ember/object'
 
 // ----- Own modules -----
 import layout from '../templates/components/ember-dialogs'
@@ -26,6 +27,13 @@ export default Component.extend({
 
 
 
+  // ----- Methods -----
+  reset () {
+    defineProperty(this, 'userInput', writable('dialogs.value'))
+  },
+
+
+
   // ----- Actions -----
   actions : {
     backdrop () {
@@ -37,10 +45,12 @@ export default Component.extend({
 
     ok (userInput) {
       this.get('dialogs.actionOkWrapped')(userInput)
+      this.reset()
     },
 
     cancel () {
       this.get('dialogs.actionCancelWrapped')()
+      this.reset()
     },
   },
 })
