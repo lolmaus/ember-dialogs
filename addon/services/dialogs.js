@@ -17,20 +17,18 @@ const BLOCK_SCROLLING_CLASS = '-ember-dialogs-block-scrolling'
 export default Service.extend({
 
   // ----- Normal properties -----
-  message           : null,
-  type              : null,
-  actionOk          : null,
-  labelOk           : null,
-  actionCancel      : null,
-  labelCancel       : null,
-  cancelVisible     : null,
+  message : null,
+  type    : null,
+
+  actionOk : null,
+  labelOk  : null,
+
+  actionCancel  : null,
+  labelCancel   : null,
+  cancelVisible : null,
+
   backdrop          : null,
   backdropClickable : null,
-
-
-
-  // ----- Defaults -----
-  labelOkDefault : 'OK',
 
 
 
@@ -42,12 +40,18 @@ export default Service.extend({
   dialog (params) {
     const {
       message,
-      actionOk,
-      labelOk,
       type,
+
+      actionOk,
+      labelOk = 'OK',
+
+      actionCancel,
+      labelCancel   = 'Cancel',
+      cancelVisible = true,
 
       backdrop          = true,
       backdropClickable = true,
+
       blockScrolling    = true,
     } = params
 
@@ -55,9 +59,14 @@ export default Service.extend({
 
     this.setProperties({
       message,
+      type,
+
       actionOk,
       labelOk,
-      type,
+
+      actionCancel,
+      labelCancel,
+      cancelVisible,
 
       backdrop,
       backdropClickable,
@@ -87,13 +96,16 @@ export default Service.extend({
 
   reset () {
     this.setProperties({
-      message           : null,
-      type              : null,
-      actionOk          : null,
-      labelOk           : null,
-      actionCancel      : null,
-      labelCancel       : null,
-      cancelVisible     : null,
+      message : null,
+      type    : null,
+
+      actionOk : null,
+      labelOk  : null,
+
+      actionCancel  : null,
+      labelCancel   : null,
+      cancelVisible : null,
+
       backdrop          : null,
       backdropClickable : null,
     })

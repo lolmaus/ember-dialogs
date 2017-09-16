@@ -1,1 +1,1 @@
-export { default, alert } from 'ember-dialogs/helpers/alert'
+export { default } from 'ember-dialogs/helpers/alert'

@@ -172,3 +172,51 @@ test('no backdrop, no action, no blockScrolling', withChai(async function (expec
   m = 'dialog existence'
   expect($('.ember-dialogs-dialog'), m).length(0)
 }))
+
+
+
+test('confirm', withChai(async function (expect) {
+  this.render(hbs`{{ember-dialogs}}`)
+
+  let value = false
+
+  run(() => {
+    dialogs.confirm({
+      message : 'lol',
+      actionCancel () { value = true },
+    })
+  })
+  await wait()
+
+  m = 'cancel button existence'
+  expect($('.ember-dialogs-dialog-button.-ember-dialogs-cancel'), m).length(1)
+
+  m = 'cancel button text'
+  expect($('.ember-dialogs-dialog-button.-ember-dialogs-cancel').text().trim(), m).equal('Cancel')
+
+  run(() => $('.ember-dialogs-dialog-button.-ember-dialogs-cancel').click())
+
+  m = 'value'
+  expect(value, m).true
+}))
+
+
+
+test('custom button labels', withChai(async function (expect) {
+  this.render(hbs`{{ember-dialogs}}`)
+
+  run(() => {
+    dialogs.confirm({
+      message     : 'lol',
+      labelOk     : 'Yup',
+      labelCancel : 'Nah',
+    })
+  })
+  await wait()
+
+  m = 'ok button text'
+  expect($('.ember-dialogs-dialog-button.-ember-dialogs-ok').text().trim(), m).equal('Yup')
+
+  m = 'cancel button text'
+  expect($('.ember-dialogs-dialog-button.-ember-dialogs-cancel').text().trim(), m).equal('Nah')
+}))

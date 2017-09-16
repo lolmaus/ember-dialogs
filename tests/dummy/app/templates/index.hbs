@@ -18,3 +18,27 @@
 >
   Toggle value
 </button>
+
+
+
+<h2>confirm test</h2>
+
+<p>
+  value:
+
+  <span class = "route-index-confirmValue">
+    {{confirmValue}}
+  </span>
+</p>
+
+<button
+  class = "route-index-alertTrigger"
+  {{action (confirm
+    message      = (concat "Wanna change the value from " confirmValue " to " (not confirmValue) "?")
+    labelOk      = 'Yup'
+    labelCancel  = 'Nah'
+    actionOk     = (toggle 'confirmValue' this)
+  )}}
+>
+  Toggle value
+</button>

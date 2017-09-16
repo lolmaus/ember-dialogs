@@ -60,6 +60,10 @@ body.-ember-dialogs-block-scrolling {
   outline       : 0;
 }
 
+.ember-dialogs-dialog-button:not(:last-child) {
+  margin-right : 0.5rem;
+}
+
 .ember-dialogs-dialog-button:hover, .ember-dialogs-dialog-button:focus {
   background-color : rgba(153, 153, 153, 0.2);
 }

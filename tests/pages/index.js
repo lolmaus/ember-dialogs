@@ -17,6 +17,9 @@ export default create({
 
   alertValue   : c('.route-index-alertValue'),
   alertTrigger : c('.route-index-alertTrigger'),
+
+  confirmValue   : c('.route-index-confirmValue'),
+  confirmTrigger : c('.route-index-confirmTrigger'),
   // confirmTrigger : c('.route-index-confirm'),
   // promptTrigger  : c('.route-index-prompt'),
 

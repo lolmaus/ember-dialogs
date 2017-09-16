@@ -51,7 +51,7 @@
             class = "ember-dialogs-dialog-button -ember-dialogs-ok"
             {{action dialogs.actionOkWrapped userInput}}
           >
-            {{or dialogs.labelOk dialogs.labelOkDefault}}
+            {{dialogs.labelOk}}
           </button>
 
           {{#if (and
@@ -65,7 +65,7 @@
               class = "ember-dialogs-dialog-button -ember-dialogs-cancel"
               {{action dialogs.actionCancelWrapped}}
             >
-              {{or dialogs.labelCancel dialogs.labelCancelDefault}}
+              {{dialogs.labelCancel}}
             </button>
           {{/if}}
         </div>{{! ember-dialogs-dialog-buttons }}
