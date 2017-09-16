@@ -137,7 +137,15 @@ export default Service.extend({
 
   _actionCancelWrapped () {
     const actionCancel = this.get('actionCancel')
-    if (actionCancel) actionCancel()
+    const type         = this.get('type')
+
+    if (
+      actionCancel
+      && (
+        type !== 'prompt'
+        || this.get('cancelVisible')
+      )
+    ) actionCancel()
 
     this.reset()
   },

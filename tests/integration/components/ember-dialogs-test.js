@@ -85,7 +85,7 @@ test('basic', withChai(async function (expect) {
 
 
 
-test('backdrop click should dismiss', withChai(async function (expect) {
+test('backdrop click should dismiss - alert mode', withChai(async function (expect) {
   this.render(hbs`{{ember-dialogs}}`)
 
   let value = false
@@ -109,6 +109,68 @@ test('backdrop click should dismiss', withChai(async function (expect) {
 
   m = 'value'
   expect(value, m).true
+}))
+
+
+
+test('backdrop click should dismiss - prompt mode', withChai(async function (expect) {
+  this.render(hbs`{{ember-dialogs}}`)
+
+  let value = false
+
+  run(() => {
+    dialogs.prompt({
+      message : 'lol',
+      actionOk () { value = true },
+      actionCancel () { value = ':D' },
+    })
+  })
+  await wait()
+
+  run(() => $('.ember-dialogs-backdrop').click())
+  await wait()
+
+  m = 'dialog existence'
+  expect($('.ember-dialogs-dialog'), m).length(0)
+
+  m = 'backdrop existence'
+  expect($('.ember-dialogs-backdrop'), m).length(0)
+
+  m = 'value'
+  expect(value, m).equal(':D')
+}))
+
+
+
+test('backdrop click should not call cancel action when cancelVisible is false', withChai(async function (expect) {
+  this.render(hbs`{{ember-dialogs}}`)
+
+  let value = false
+
+  run(() => {
+    dialogs.prompt({
+      message       : 'lol',
+      cancelVisible : false,
+      actionOk () { value = true },
+      actionCancel () { value = ':D' },
+    })
+  })
+  await wait()
+
+  m = 'cancel button existence'
+  expect($('.ember-dialogs-dialog-button.-ember-dialogs-cancel'), m).length(0)
+
+  run(() => $('.ember-dialogs-backdrop').click())
+  await wait()
+
+  m = 'dialog existence'
+  expect($('.ember-dialogs-dialog'), m).length(0)
+
+  m = 'backdrop existence'
+  expect($('.ember-dialogs-backdrop'), m).length(0)
+
+  m = 'value'
+  expect(value, m).false
 }))
 
 
