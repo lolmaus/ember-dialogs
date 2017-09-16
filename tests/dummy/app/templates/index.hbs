@@ -1,4 +1,4 @@
-<h2>alert test</h2>
+<h2>Alert test</h2>
 
 <p>
   value:
@@ -21,7 +21,7 @@
 
 
 
-<h2>confirm test</h2>
+<h2>Confirm test</h2>
 
 <p>
   value:
@@ -45,7 +45,7 @@
 
 
 
-<h2>prompt test</h2>
+<h2>Prompt test</h2>
 
 <p>
   value:
@@ -67,5 +67,21 @@
     actionOk     = (action (mut promptValue))
   )}}
 >
+  Toggle value
+</button>
+
+
+
+<h2>Chain test</h2>
+
+<p>
+  value:
+
+  <span class = "route-index-chainValue">
+    {{chainValue}}
+  </span>
+</p>
+
+<button {{action 'chain'}}>
   Toggle value
 </button>

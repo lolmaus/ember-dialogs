@@ -23,6 +23,7 @@ You are welcome to contribute!
 
 * a11y/ARIA.
 * Keyboard support (tabindex, cancel with Esc, etc)
+* autofocus on input
 
 
 
@@ -280,6 +281,24 @@ prompt.buttonOk.click()
 
 assert.ok(confirm.$.offset().top > 100)
 ```
+
+
+## Chained usage
+
+If you invoke a dialog from another dialog's action, the inner dialog will not show up.
+ 
+This is because the outer dialog will cleanup after itself and hide the inner dialog immediately after it shows up. The inner dialog doesn't even get to render.
+
+To work around this issue, wrap the inner dialog invocation with `next`. See demo app's [`chain` action](https://github.com/lolmaus/ember-dialogs/blob/gen-0/tests/dummy/app/controllers/index.js).
+
+
+
+## Notable dependencies
+
+* [liquid-tether](https://pzuraq.github.io/liquid-tether/)
+* [liquid-fire](https://ember-animation.github.io/liquid-fire/)
+* jQuery
+* [ember-truth-helpers](https://github.com/jmurphyau/ember-truth-helpers)
 
 
 
