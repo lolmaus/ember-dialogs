@@ -5,6 +5,7 @@ import { create } from 'ember-cli-page-object'
 import {alert} from 'dummy/tests/pages/components/dialogs'
 import wait from 'ember-test-helpers/wait'
 import $ from 'jquery'
+import { run } from '@ember/runloop'
 
 const page = create(alert)
 let dialogs, m
@@ -41,9 +42,11 @@ test('basic', withChai(async function (expect) {
   m = '#0 Initial: body hasClass -ember-dialogs-block-scrolling'
   expect($('body').hasClass('-ember-dialogs-block-scrolling'), m).false
 
-  dialogs.alert({
-    message : 'lol',
-    actionOk () { value = true },
+  run(() => {
+    dialogs.alert({
+      message : 'lol',
+      actionOk () { value = true },
+    })
   })
 
   await wait()
@@ -63,7 +66,8 @@ test('basic', withChai(async function (expect) {
   m = '#1 After triggering dialog: body hasClass -ember-dialogs-block-scrolling'
   expect($('body').hasClass('-ember-dialogs-block-scrolling'), m).true
 
-  $('.ember-dialogs-dialog-button').click()
+
+  run(() => $('.ember-dialogs-dialog-button').click())
   await wait()
 
   m = '#2 After dismissing dialog: dialog existence'
@@ -86,13 +90,15 @@ test('backdrop click should dismiss', withChai(async function (expect) {
 
   let value = false
 
-  dialogs.alert({
-    message : 'lol',
-    actionOk () { value = true },
+  run(() => {
+    dialogs.alert({
+      message : 'lol',
+      actionOk () { value = true },
+    })
   })
   await wait()
 
-  $('.ember-dialogs-backdrop').click()
+  run(() => $('.ember-dialogs-backdrop').click())
   await wait()
 
   m = 'dialog existence'
@@ -112,14 +118,16 @@ test('backdrop click should not dismiss when backdropClickable=false', withChai(
 
   let value = false
 
-  dialogs.alert({
-    message           : 'lol',
-    backdropClickable : false,
-    actionOk () { value = true },
+  run(() => {
+    dialogs.alert({
+      message           : 'lol',
+      backdropClickable : false,
+      actionOk () { value = true },
+    })
   })
   await wait()
 
-  $('.ember-dialogs-backdrop').click()
+  run(() => $('.ember-dialogs-backdrop').click())
   await wait()
 
   m = 'dialog existence'
@@ -137,17 +145,19 @@ test('backdrop click should not dismiss when backdropClickable=false', withChai(
 test('no backdrop, no action, no blockScrolling', withChai(async function (expect) {
   this.render(hbs`{{ember-dialogs}}`)
 
-  dialogs.alert({
-    message        : 'lol',
-    backdrop       : false,
-    blockScrolling : false,
+  run(() => {
+    dialogs.alert({
+      message        : 'lol',
+      backdrop       : false,
+      blockScrolling : false,
+    })
   })
   await wait()
 
   m = 'body hasClass -ember-dialogs-block-scrolling'
   expect($('body').hasClass('-ember-dialogs-block-scrolling'), m).false
 
-  $('.ember-dialogs-backdrop').click()
+  run(() => $('.ember-dialogs-backdrop').click())
   await wait()
 
   m = 'dialog existence'
@@ -156,7 +166,7 @@ test('no backdrop, no action, no blockScrolling', withChai(async function (expec
   m = 'backdrop existence'
   expect($('.ember-dialogs-backdrop'), m).length(0)
 
-  $('.ember-dialogs-dialog-button').click()
+  run(() => $('.ember-dialogs-dialog-button').click())
   await wait()
 
   m = 'dialog existence'
