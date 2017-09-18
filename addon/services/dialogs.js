@@ -128,7 +128,7 @@ export default Service.extend({
 
   actionOkWrapped       : bind('_actionOkWrapped'),
   actionCancelWrapped   : bind('_actionCancelWrapped'),
-  actionBackdropWrapped : bind('_actionCancelWrapped'),
+  actionBackdropWrapped : bind('_actionBackdropWrapped'),
 
 
 
