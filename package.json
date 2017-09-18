@@ -1,12 +1,23 @@
 {
   "name": "ember-dialogs",
   "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "description": "Customizable implementation of `alert`, `confirm` and `prompt` modal dialogs with straightforward API",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "alert",
+    "confirm",
+    "prompt",
+    "modal dialog",
+    "modal",
+    "dialog",
+    "modal-dialog"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Andrey Mikhaylov @lolmaus <lolmaus@gmail.com> (http://lolma.us)",
+  "homepage": "https://github.com/lolmaus/ember-dialogs",
+  "bugs": {
+    "url": "https://github.com/lolmaus/ember-dialogs/issues"
+  },
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -57,6 +68,7 @@
     "node": "^4.5 || 6.* || >= 7.*"
   },
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "https://lolmaus.github.io/ember-dialogs/"
   }
 }
