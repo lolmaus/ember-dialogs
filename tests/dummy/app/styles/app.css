@@ -5,3 +5,11 @@ html {
 * {
   box-sizing: border-box;
 }
+
+.sections {
+  display: flex;
+}
+
+.sections article:not(:last-child) {
+  margin-right: 4rem;
+}

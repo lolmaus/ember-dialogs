@@ -1,87 +1,114 @@
-<h2>Alert test</h2>
-
 <p>
-  value:
+  View the source of this page:
 
-  <span class = "route-index-alertValue">
-    {{alertValue}}
-  </span>
+  <a href="https://github.com/lolmaus/ember-dialogs/blob/gen-0/tests/dummy/app/templates/index.hbs#L15">
+    template
+    {{~concat~}}
+  </a>,
+
+  <a href="https://github.com/lolmaus/ember-dialogs/blob/gen-0/tests/dummy/app/controller/index.js#L15">
+    controller
+    {{~concat~}}
+  </a>.
 </p>
 
-<button
-  class = "route-index-alertTrigger"
-  {{action (alert
-    message  = (concat "Value will be toggled from " alertValue " to " (not alertValue) ".")
-    labelOk  = 'Yup'
-    actionOk = (toggle 'alertValue' this)
-  )}}
->
-  Toggle value
-</button>
 
 
-
-<h2>Confirm test</h2>
-
-<p>
-  value:
-
-  <span class = "route-index-confirmValue">
-    {{confirmValue}}
-  </span>
-</p>
-
-<button
-  class = "route-index-alertTrigger"
-  {{action (confirm
-    message      = (concat "Wanna change the value from " confirmValue " to " (not confirmValue) "?")
-    labelOk      = 'Yup'
-    labelCancel  = 'Nah'
-    actionOk     = (toggle 'confirmValue' this)
-  )}}
->
-  Toggle value
-</button>
+<div class="sections">
 
 
+  <article>
+    <h2>Alert</h2>
 
-<h2>Prompt test</h2>
+    <p>
+      value:
 
-<p>
-  value:
+      <span class = "route-index-alertValue">
+        {{alertValue}}
+      </span>
+    </p>
 
-  <span class = "route-index-promptValue">
-    {{promptValue}}
-  </span>
-</p>
-
-<button
-  class = "route-index-promptTrigger"
-  {{action (prompt
-    message      = 'Type in a new value'
-    labelOk      = 'Yup'
-    labelCancel  = 'Nah'
-    value        = promptValue
-    placeholder  = 'Please type something'
-
-    actionOk     = (action (mut promptValue))
-  )}}
->
-  Toggle value
-</button>
+    <button
+      class = "route-index-alertTrigger"
+      {{action (alert
+        message  = (concat "Value will be toggled from " alertValue " to " (not alertValue) ".")
+        labelOk  = 'Yup'
+        actionOk = (toggle 'alertValue' this)
+      )}}
+    >
+      Toggle value
+    </button>
+  </article>
 
 
+  <article>
+    <h2>Confirm</h2>
 
-<h2>Chain test</h2>
+    <p>
+      value:
 
-<p>
-  value:
+      <span class = "route-index-confirmValue">
+        {{confirmValue}}
+      </span>
+    </p>
 
-  <span class = "route-index-chainValue">
-    {{chainValue}}
-  </span>
-</p>
+    <button
+      class = "route-index-alertTrigger"
+      {{action (confirm
+        message      = (concat "Wanna change the value from " confirmValue " to " (not confirmValue) "?")
+        labelOk      = 'Yup'
+        labelCancel  = 'Nah'
+        actionOk     = (toggle 'confirmValue' this)
+      )}}
+    >
+      Toggle value
+    </button>
+  </article>
 
-<button {{action 'chain'}}>
-  Toggle value
-</button>
+
+  <article>
+    <h2>Prompt</h2>
+
+    <p>
+      value:
+
+      <span class = "route-index-promptValue">
+        {{promptValue}}
+      </span>
+    </p>
+
+    <button
+      class = "route-index-promptTrigger"
+      {{action (prompt
+        message      = 'Type in a new value'
+        labelOk      = 'Yup'
+        labelCancel  = 'Nah'
+        value        = promptValue
+        placeholder  = 'Please type something'
+
+        actionOk     = (action (mut promptValue))
+      )}}
+    >
+      Toggle value
+    </button>
+  </article>
+
+
+  <article>
+    <h2>Chaining</h2>
+
+    <p>
+      value:
+
+      <span class = "route-index-chainValue">
+        {{chainValue}}
+      </span>
+    </p>
+
+    <button {{action 'chain'}}>
+      Toggle value
+    </button>
+  </article>
+
+
+</div>
