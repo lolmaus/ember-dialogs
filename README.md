@@ -1,6 +1,15 @@
 # ember-dialogs
 
-Customizable implementation of `alert`, `confirm` and `prompt` modal dialogs with very simple API.
+[![Travis build status](https://img.shields.io/travis/lolmaus/ember-dialogs.svg)](https://travis-ci.org/lolmaus/ember-dialogs)
+[![Ember Observer Score](http://emberobserver.com/badges/ember-dialogs.svg?cache_bust=1)](http://emberobserver.com/addons/ember-dialogs)
+[![npm package version](https://img.shields.io/npm/v/ember-dialogs.svg)](https://www.npmjs.com/package/ember-dialogs)
+[![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/lolmaus/ember-dialogs/blob/gen-1/LICENSE.md)
+![ember-versions 1.13+](https://img.shields.io/badge/ember--versions-1.13%2B-yellowgreen.svg)
+![node-versions 4+](https://img.shields.io/badge/node--versions-4%2B-yellowgreen.svg)
+![ember-cli 2.16.0-beta.1](https://img.shields.io/badge/uses%20ember--cli-2.16.0-beta.1-blue.svg)
+
+
+Customizable implementation of `alert`, `confirm` and `prompt` modal dialogs with straightforward API.
 
 Modal dialogs are driven by [liquid-tether](https://pzuraq.github.io/liquid-tether/).
 
