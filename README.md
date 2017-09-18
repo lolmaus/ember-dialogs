@@ -251,20 +251,21 @@ In order to throw in your own HTML for the dialogs, use the block form of compon
 
 Here's a list of params available as properties on the yielded object:
 
-| Property              | Expected type  | Description                                                                                                               |
-|:----------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------|
-| `message`             | String         | Text to appear on the modal.                                                                                              |
-| `type`                | String         | `'alert'`, `'confirm'` or `'prompt'`                                                                                      |
-| `value`               | String         | Value for the prompt input field. Using it as `{{input}}`'value will mutate the bound value as user types into the input. |
-| `userInput`           | String         | Same as `value` but passed through `reads` computed property. Mutating it does not update the bound value.                |
-| `placeholder`         | String         | Placeholder for the prompt input field.                                                                                   |
-| `labelOk`             | String         | Label for the OK button.                                                                                                  |
-| `labelCancel`         | String         | Label for the Cancel button.                                                                                              |
-| `actionOk`            | Closure action | Action to execute when OK button is clicked.                                                                              |
-| `actionCancel`        | Closure action | Action to execute when Cancel button is clicked.                                                                          |
-| `actionBackdrop`      | Closure action | Action to execute when the backdrop is clicked: either OK or Cancel depending on dialog type. Useful for the 🗙 button.   |
-| `cancelVisible`       | Boolean        | Value of the `cancelVisible` property passed when calling a dialog.                                                       |
-| `shouldDisplayCancel` | Boolean        | False for `alert`, true for `confirm`, equal to `cancelVisible` for `prompt`.                                             |
+| Property              | Expected type  | Description                                                                                                                          |
+|:----------------------|:---------------|:-------------------------------------------------------------------------------------------------------------------------------------|
+| `message`             | String         | Text to appear on the modal.                                                                                                         |
+| `type`                | String         | `'alert'`, `'confirm'` or `'prompt'`                                                                                                 |
+| `value`               | String         | Value for the prompt input field. Using it as `{{input}}`'value will mutate the bound value as user types into the input.            |
+| `userInput`           | String         | Same as `value` but passed through `reads` computed property. Mutating it does not update the bound value.                           |
+| `placeholder`         | String         | Placeholder for the prompt input field.                                                                                              |
+| `labelOk`             | String         | Label for the OK button.                                                                                                             |
+| `labelCancel`         | String         | Label for the Cancel button.                                                                                                         |
+| `actionOk`            | Closure action | Action to execute when OK button is clicked.                                                                                         |
+| `actionCancel`        | Closure action | Action to execute when Cancel button is clicked.                                                                                     |
+| `actionBackdrop`      | Closure action | Action to execute when the backdrop is clicked: either OK or Cancel depending on dialog type. Useful for an 🗙 button in top corner. |
+| `backdropClickable`   | Boolean        | Whether the backdrop is clickable. Can be used to hide an 🗙 button in top corner.                                                   |
+| `cancelVisible`       | Boolean        | Value of the `cancelVisible` property passed when calling a dialog.                                                                  |
+| `shouldDisplayCancel` | Boolean        | False for `alert`, true for `confirm`, equal to `cancelVisible` for `prompt`.                                                        |
 
 
 
