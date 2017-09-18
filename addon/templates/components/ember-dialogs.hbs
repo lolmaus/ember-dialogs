@@ -1,7 +1,7 @@
 {{#if (and dialogs.type dialogs.backdrop)}}
   {{liquid-wormhole
     stack = 'ember-dialogs-backdrop'
-    click = (action 'backdrop')
+    click = (action dialogs.actionBackdropWrapped)
 
     class = (concat
       'ember-dialogs-backdrop '
@@ -41,6 +41,8 @@
             dialogs.cancelVisible
           )
         )
+
+        actionBackdrop = dialogs.actionBackdropWrapped
 
         value       = dialogs.value
         userInput   = dialogs.userInput

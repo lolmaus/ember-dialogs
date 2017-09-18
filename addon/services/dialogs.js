@@ -126,8 +126,9 @@ export default Service.extend({
     this._unblockScrolling()
   },
 
-  actionOkWrapped     : bind('_actionOkWrapped'),
-  actionCancelWrapped : bind('_actionCancelWrapped'),
+  actionOkWrapped       : bind('_actionOkWrapped'),
+  actionCancelWrapped   : bind('_actionCancelWrapped'),
+  actionBackdropWrapped : bind('_actionCancelWrapped'),
 
 
 
@@ -152,6 +153,13 @@ export default Service.extend({
     ) actionCancel()
 
     this.reset()
+  },
+
+  _actionBackdropWrapped () {
+    if (!this.get('backdropClickable')) return
+
+    if (this.get('type') === 'alert') this.get('actionOkWrapped')()
+    else                              this.get('actionCancelWrapped')()
   },
 
   _blockScrolling () {

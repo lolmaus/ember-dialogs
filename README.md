@@ -260,8 +260,9 @@ Here's a list of params available as properties on the yielded object:
 | `placeholder`         | String         | Placeholder for the prompt input field.                                                                                   |
 | `labelOk`             | String         | Label for the OK button.                                                                                                  |
 | `labelCancel`         | String         | Label for the Cancel button.                                                                                              |
-| `actionOk`            | Closure action | Action to execute when OK button is pressed.                                                                              |
-| `actionCancel`        | Closure action | Action to execute when Cancel button is pressed.                                                                          |
+| `actionOk`            | Closure action | Action to execute when OK button is clicked.                                                                              |
+| `actionCancel`        | Closure action | Action to execute when Cancel button is clicked.                                                                          |
+| `actionBackdrop`      | Closure action | Action to execute when the backdrop is clicked: either OK or Cancel depending on dialog type. Useful for the 🗙 button.   |
 | `cancelVisible`       | Boolean        | Value of the `cancelVisible` property passed when calling a dialog.                                                       |
 | `shouldDisplayCancel` | Boolean        | False for `alert`, true for `confirm`, equal to `cancelVisible` for `prompt`.                                             |
 

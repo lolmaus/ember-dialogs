@@ -17,16 +17,4 @@ export default Component.extend({
   // ----- Overridden properties -----
   layout,
   tagName : null,
-
-
-
-  // ----- Actions -----
-  actions : {
-    backdrop () {
-      if (!this.get('dialogs.backdropClickable')) return
-
-      if (this.get('dialogs.type') === 'alert') this.get('dialogs.actionOkWrapped')()
-      else                                      this.get('dialogs.actionCancelWrapped')()
-    },
-  },
 })
