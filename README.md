@@ -21,9 +21,9 @@ Modal dialogs are driven by [liquid-tether](https://pzuraq.github.io/liquid-teth
 
 You are welcome to contribute!
 
-* a11y/ARIA.
-* Keyboard support (tabindex, cancel with Esc, etc)
-* autofocus on input
+* A11y/ARIA.
+* Keyboard support: tabindex, cancel with Esc, etc.
+* Autofocus on input.
 
 
 
@@ -206,20 +206,61 @@ this.transition(
 In order to throw in your own HTML for the dialogs, use the block form of components in the `application` template:
 
 ```handlebars
-{{#ember-dialogs-prompt as |params|}}
-  <p>{{params.message}}</p>
+{{#ember-dialogs as |params|}}
+  <p>{{params.userInput}}</p>
+  <div class="dialog">
+    {{#if params.message}}
+      <p class="message">{{params.message}}</p>
+    {{/if}}
 
-  <p>
-    <button {{action params.actionOk}}>
+    {{#if (eq params.type 'prompt')}}
+      {{input 
+        class       = 'input'
+        value       = params.userInput
+        placeholder = params.placeholder
+        enter       = (action params.actionOk params.userInput)
+      }}
+    {{/if}}
+
+    <button
+      class = "ok"
+      {{action params.actionOk params.userInput}}
+    >
       {{params.labelOk}}
     </button>
-  
-    <button {{action params.actionCancel}}>
-      {{params.labelCancel}}
-    </button>
-  </p>
-{{/ember-dialogs-prompt}}
+
+    {{#if params.shouldDisplayCancel}}
+      <button
+        class = "cancel"
+        {{action params.actionCancel}}
+      >
+        {{params.labelCancel}}
+      </button>
+    {{/if}}
+  </div>
+{{/ember-dialogs}}
 ```
+
+Here's a list of params available as properties on the yielded object:
+
+| Property              | Expected type  | Description                                                                                                               |
+|:----------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------|
+| `message`             | String         | Text to appear on the modal.                                                                                              |
+| `type`                | String         | `'alert'`, `'confirm'` or `'prompt'`                                                                                      |
+| `value`               | String         | Value for the prompt input field. Using it as `{{input}}`'value will mutate the bound value as user types into the input. |
+| `userInput`           | String         | Same as `value` but passed through `reads` computed property. Mutating it does not update the bound value.                |
+| `placeholder`         | String         | Placeholder for the prompt input field.                                                                                   |
+| `labelOk`             | String         | Label for the OK button.                                                                                                  |
+| `labelCancel`         | String         | Label for the Cancel button.                                                                                              |
+| `actionOk`            | Closure action | Action to execute when OK button is pressed.                                                                              |
+| `actionCancel`        | Closure action | Action to execute when Cancel button is pressed.                                                                          |
+| `cancelVisible`       | Boolean        | Value of the `cancelVisible` property passed when calling a dialog.                                                       |
+| `shouldDisplayCancel` | Boolean        | False for `alert`, true for `confirm`, equal to `cancelVisible` for `prompt`.                                             |
+
+
+
+
+## Customizing the backdrop
 
 The backdrop is a single HTML element which can be customized by applying CSS to `.ember-dialogs-backdrop`.
 
@@ -282,6 +323,8 @@ prompt.buttonOk.click()
 assert.ok(confirm.$.offset().top > 100)
 ```
 
+See our [acceptance tests](https://github.com/lolmaus/ember-dialogs/blob/gen-0/tests/acceptance/index-test.js) for some inspiration.
+
 
 ## Chained usage
 
@@ -302,6 +345,12 @@ To work around this issue, wrap the inner dialog invocation with `next`. See dem
 
 
 
+## Private API usage
+
+This addon uses `defineProperty` from `'@ember/object'` which is marked as private in the API docs. If you know a better way to reset an overwritten `reads` CP, please create an issue or PR.
+
+
+
 ## License
 
 MIT.
@@ -310,4 +359,4 @@ MIT.
 
 ## Credit
 
-Build by Andrey Mihkaylov ([lolmaus](https://github.com/lolmaus)) and [contributors]().
+Build by Andrey Mihkaylov ([lolmaus](https://github.com/lolmaus)) and [contributors](https://github.com/lolmaus/ember-dialogs/graphs/contributors).

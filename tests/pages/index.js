@@ -20,8 +20,9 @@ export default create({
 
   confirmValue   : c('.route-index-confirmValue'),
   confirmTrigger : c('.route-index-confirmTrigger'),
-  // confirmTrigger : c('.route-index-confirm'),
-  // promptTrigger  : c('.route-index-prompt'),
+
+  promptValue   : c('.route-index-promptValue'),
+  promptTrigger : c('.route-index-promptTrigger'),
 
   backdrop,
   dialog,

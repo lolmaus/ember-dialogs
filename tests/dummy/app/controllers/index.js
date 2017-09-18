@@ -30,13 +30,11 @@ export default Controller.extend({
         actionOk : () => {
 
           next(() => {
-            console.log('will confirm')
             dialogs.confirm({
               message  : 'Are you sure?',
               actionOk : () => {
 
                 next(() => {
-                  console.log('will prompt')
                   dialogs.prompt({
                     message  : 'Type "yes" to proceed',
                     actionOk : userInput => {

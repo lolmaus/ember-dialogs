@@ -28,7 +28,7 @@ moduleForComponent('ember-dialogs', 'Integration | Component | ember dialogs', {
 
 
 
-test('basic', withChai(async function (expect) {
+test('alert, most basic features', withChai(async function (expect) {
   this.render(hbs`{{ember-dialogs}}`)
 
   let value = false
@@ -81,6 +81,20 @@ test('basic', withChai(async function (expect) {
 
   m = '#2 After dismissing dialog: body hasClass -ember-dialogs-block-scrolling'
   expect($('body').hasClass('-ember-dialogs-block-scrolling'), m).false
+}))
+
+
+
+test('empty message', withChai(async function (expect) {
+  this.render(hbs`{{ember-dialogs}}`)
+
+  run(() => {
+    dialogs.alert()
+  })
+  await wait()
+
+  m = 'message existence'
+  expect($('.ember-dialogs-dialog-message'), m).length(0)
 }))
 
 
@@ -315,10 +329,8 @@ test('prompt', withChai(async function (expect) {
 
   run(() => $('.ember-dialogs-dialog-input').val('heeyoo'))
   await wait()
-
   run(() => $('.ember-dialogs-dialog-input').change())
   await wait()
-
   run(() => $('.ember-dialogs-dialog-button.-ember-dialogs-ok').click())
   await wait()
 
@@ -337,4 +349,105 @@ test('prompt', withChai(async function (expect) {
 
   m = 'input value after second invocation'
   expect($('.ember-dialogs-dialog-input').val(), m).equal('naa')
+}))
+
+
+
+test('prompt block form', withChai(async function (expect) {
+  this.render(hbs`
+    {{#ember-dialogs as |params|}}
+      <p>{{params.userInput}}</p>
+      <div class="dialog">
+        {{#if params.message}}
+          <p class="message">{{params.message}}</p>
+        {{/if}}
+  
+        {{#if (eq params.type 'prompt')}}
+          {{input 
+            class       = 'input'
+            value       = params.userInput
+            placeholder = params.placeholder
+            enter       = (action params.actionOk params.userInput)
+          }}
+        {{/if}}
+  
+        <button
+          class = "ok"
+          {{action params.actionOk params.userInput}}
+        >
+          {{params.labelOk}}
+        </button>
+  
+        {{#if params.shouldDisplayCancel}}
+          <button
+            class = "cancel"
+            {{action params.actionCancel}}
+          >
+            {{params.labelCancel}}
+          </button>
+        {{/if}}
+      </div>
+    {{/ember-dialogs}}
+  `)
+
+  let value = 'bah'
+
+  m = '#0 Initial: dialog existence'
+  expect($('.dialog'), m).length(0)
+
+  run(() => {
+    dialogs.prompt({
+      message     : 'lol',
+      placeholder : 'wut',
+      value,
+      actionOk (userInput) { value = userInput },
+    })
+  })
+  await wait()
+
+  m = '#1 After triggering dialog: dialog existence'
+  expect($('.dialog'), m).length(1)
+
+  m = '#1 After triggering dialog: message text'
+  expect($('.message').text().trim(), m).equal('lol')
+
+  m = '#1 After triggering dialog: OK button text'
+  expect($('.ok').text().trim(), m).equal('OK')
+
+  m = '#1 After triggering dialog: Cancel button text'
+  expect($('.cancel').text().trim(), m).equal('Cancel')
+
+  m = '#1 After triggering dialog: input value'
+  expect($('.input').val(), m).equal('bah')
+
+  m = '#1 After triggering dialog: input placeholder'
+  expect($('.input').attr('placeholder'), m).equal('wut')
+
+  run(() => $('.input').val('bleh'))
+  await wait()
+  run(() => $('.input').change())
+  await wait()
+  run(() => $('.ok').click())
+  await wait()
+
+  m = '#2 After dismissing dialog: dialog existence'
+  expect($('.ember-dialogs-dialog'), m).length(0)
+
+  m = '#2 After dismissing dialog: value'
+  expect(value, m).equal('bleh')
+
+  value = 'nom'
+
+  run(() => {
+    dialogs.prompt({
+      message     : 'lol',
+      placeholder : 'wut',
+      value,
+      actionOk (userInput) { value = userInput },
+    })
+  })
+  await wait()
+
+  m = '#3 After re-triggering dialog: input value'
+  expect($('.input').val(), m).equal('nom')
 }))

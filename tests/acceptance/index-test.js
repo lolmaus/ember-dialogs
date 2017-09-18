@@ -23,9 +23,9 @@ test('initial state', withChai(async function (expect) {
 
 
 
-test('alert', withChai(async function (expect) {
+test('prompt', withChai(async function (expect) {
   await visit('/')
-  await page.alertTrigger.click()
+  await page.promptTrigger.click()
 
   m = "#0 Initial: value"
   expect(page.alertValue.text, m).equal("false")
@@ -33,23 +33,33 @@ test('alert', withChai(async function (expect) {
   m = "#0 Initial: backdrop visibility"
   expect(page.backdrop.visible, m).true
 
-  m = "#0 Initial: alert visibility"
+  m = "#0 Initial: dialog visibility"
   expect(page.dialog.visible, m).true
 
-  m = "#0 Initial: alert message text"
-  expect(page.dialog.message.text, m).equal("Value will be toggled from false to true.")
+  m = "#0 Initial: message text"
+  expect(page.dialog.message.text, m).equal("Type in a new value")
 
-  m = "#0 Initial: alert ok button text"
+  m = "#0 Initial: input value"
+  expect(page.dialog.input.value, m).equal("foo")
+
+  m = "#0 Initial: input placeholder"
+  expect(page.dialog.input.placeholder, m).equal("Please type something")
+
+  m = "#0 Initial: ok button text"
   expect(page.dialog.buttonOk.text, m).equal("Yup")
 
+  m = "#0 Initial: cancel button text"
+  expect(page.dialog.buttonCancel.text, m).equal("Nah")
+
+  await page.dialog.input.fill('bar')
   await page.dialog.buttonOk.click()
 
   m = "#1 After click on OK: value"
-  expect(page.alertValue.text, m).equal("true")
+  expect(page.promptValue.text, m).equal("bar")
 
   m = "#1 After click on OK: backdrop visibility"
   expect(page.backdrop.visible, m).false
 
-  m = "#1 After click on OK: alert visibility"
+  m = "#1 After click on OK: dialog visibility"
   expect(page.dialog.visible, m).false
 }))

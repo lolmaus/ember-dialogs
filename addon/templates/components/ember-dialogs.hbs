@@ -24,13 +24,27 @@
   }}
     {{#if hasBlock}}
       {{yield (hash
-        message       = dialogs.message
-        type          = dialogs.type
-        labelOk       = (or dialogs.labelOk dialogs.labelOkDefault)
-        labelCancel   = (or dialogs.labelCancel dialogs.labelCancelDefault)
-        actionOk      = (action 'ok')
-        actionCancel  = (action 'cancel')
+        message = dialogs.message
+        type    = dialogs.type
+
+        labelOk  = dialogs.labelOk
+        actionOk = (action dialogs.actionOkWrapped)
+
+        labelCancel   = dialogs.labelCancel
+        actionCancel  = (action dialogs.actionCancelWrapped)
         cancelVisible = dialogs.cancelVisible
+
+        shouldDisplayCancel = (or
+          (eq dialogs.type 'confirm')
+          (and
+            (eq dialogs.type 'prompt')
+            dialogs.cancelVisible
+          )
+        )
+
+        value       = dialogs.value
+        userInput   = dialogs.userInput
+        placeholder = dialogs.placeholder
       )}}
     {{else}}{{! hasBlock }}
       <div class = "ember-dialogs-dialog">
@@ -44,30 +58,30 @@
         {{#if (eq dialogs.type 'prompt')}}
           {{input
             class       = 'ember-dialogs-dialog-input'
-            value       = userInput
+            value       = dialogs.userInput
             placeholder = dialogs.placeholder
-            enter       = (action 'ok' userInput)
+            enter       = (action dialogs.actionOkWrapped dialogs.userInput)
           }}
         {{/if}}
 
         <div class = "ember-dialogs-dialog-buttons">
           <button
             class = "ember-dialogs-dialog-button -ember-dialogs-ok"
-            {{action 'ok' userInput}}
+            {{action dialogs.actionOkWrapped dialogs.userInput}}
           >
             {{dialogs.labelOk}}
           </button>
 
-          {{#if (and
-            (or
-              (eq dialogs.type 'confirm')
+          {{#if (or
+            (eq dialogs.type 'confirm')
+            (and
               (eq dialogs.type 'prompt')
+              dialogs.cancelVisible
             )
-            dialogs.cancelVisible
           )}}
             <button
               class = "ember-dialogs-dialog-button -ember-dialogs-cancel"
-              {{action 'cancel'}}
+              {{action dialogs.actionCancelWrapped}}
             >
               {{dialogs.labelCancel}}
             </button>

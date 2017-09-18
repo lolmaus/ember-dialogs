@@ -1,6 +1,7 @@
 // ----- Ember modules -----
 import Service from '@ember/service'
-// import { computed } from '@ember/object'
+import { reads as writable } from '@ember/object/computed'
+import { defineProperty } from '@ember/object'
 
 // ----- Ember addon modules -----
 
@@ -33,6 +34,7 @@ export default Service.extend({
 
 
   // ----- Computed properties -----
+  userInput : writable('value'),
 
 
 
@@ -118,6 +120,8 @@ export default Service.extend({
       backdrop          : null,
       backdropClickable : null,
     })
+
+    defineProperty(this, 'userInput', writable('value'))
 
     this._unblockScrolling()
   },
