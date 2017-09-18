@@ -4,7 +4,7 @@
 [![Ember Observer Score](http://emberobserver.com/badges/ember-dialogs.svg?cache_bust=1)](http://emberobserver.com/addons/ember-dialogs)
 [![npm package version](https://img.shields.io/npm/v/ember-dialogs.svg)](https://www.npmjs.com/package/ember-dialogs)
 [![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/lolmaus/ember-dialogs/blob/gen-1/LICENSE.md)
-![ember-versions 1.13+](https://img.shields.io/badge/ember--versions-1.13%2B-yellowgreen.svg)
+![ember-versions 2.8+](https://img.shields.io/badge/ember--versions-2.8%2B-yellowgreen.svg)
 ![node-versions 4+](https://img.shields.io/badge/node--versions-4%2B-yellowgreen.svg)
 ![ember-cli 2.16.0-beta.1](https://img.shields.io/badge/uses%20ember--cli-2.16.0-beta.1-blue.svg)
 
@@ -362,7 +362,7 @@ This addon uses `defineProperty` from `'@ember/object'` which is marked as priva
 
 ## License
 
-MIT.
+[MIT](https://github.com/lolmaus/ember-dialogs/blob/gen-0/LICENSE.md).
 
 
 
