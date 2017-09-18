@@ -356,7 +356,6 @@ test('prompt', withChai(async function (expect) {
 test('prompt block form', withChai(async function (expect) {
   this.render(hbs`
     {{#ember-dialogs as |params|}}
-      <p>{{params.userInput}}</p>
       <div class="dialog">
         {{#if params.message}}
           <p class="message">{{params.message}}</p>

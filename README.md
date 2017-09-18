@@ -216,7 +216,6 @@ In order to throw in your own HTML for the dialogs, use the block form of compon
 
 ```handlebars
 {{#ember-dialogs as |params|}}
-  <p>{{params.userInput}}</p>
   <div class="dialog">
     {{#if params.message}}
       <p class="message">{{params.message}}</p>
