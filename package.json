@@ -1,6 +1,6 @@
 {
   "name": "ember-dialogs",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Customizable implementation of `alert`, `confirm` and `prompt` modal dialogs with straightforward API",
   "keywords": [
     "ember-addon",
