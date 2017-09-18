@@ -113,7 +113,7 @@ export default Component.extend({
     toggle (value) {
       this.get('dialogs').confirm({
         message: 'Are you sure?',
-        actionOk () { this.set('importantValue', value) },
+        actionOk: () => { this.set('importantValue', value) }, // Use arrow function to keep the scope
       })
     }
   }
