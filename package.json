@@ -22,7 +22,7 @@
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "lolmaus/ember-dialogs",
   "scripts": {
     "build": "ember build",
     "start": "ember server",

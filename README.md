@@ -6,12 +6,14 @@
 [![license MIT](https://img.shields.io/badge/license-MIT-brightgreen.svg)](https://github.com/lolmaus/ember-dialogs/blob/gen-1/LICENSE.md)
 ![ember-versions 2.8+](https://img.shields.io/badge/ember--versions-2.8%2B-yellowgreen.svg)
 ![node-versions 4+](https://img.shields.io/badge/node--versions-4%2B-yellowgreen.svg)
-![ember-cli 2.16.0-beta.1](https://img.shields.io/badge/uses%20ember--cli-2.16.0-beta.1-blue.svg)
+![ember-cli 2.16.0-beta.1](https://img.shields.io/badge/uses-ember--cli%202.16.0--beta.1-blue.svg)
 
 
 Customizable implementation of `alert`, `confirm` and `prompt` modal dialogs with straightforward API.
 
 Modal dialogs are driven by [liquid-tether](https://pzuraq.github.io/liquid-tether/).
+
+[Demo](https://lolmaus.github.io/ember-dialogs/).
 
 
 
@@ -30,9 +32,10 @@ Modal dialogs are driven by [liquid-tether](https://pzuraq.github.io/liquid-teth
 
 You are welcome to contribute!
 
-* A11y/ARIA.
-* Keyboard support: tabindex, cancel with Esc, etc.
-* Autofocus on input.
+* Use namespaced names for helpers [#1](https://github.com/lolmaus/ember-dialogs/issues/1)
+* A11y/ARIA [#2](https://github.com/lolmaus/ember-dialogs/issues/2)
+* Keyboard support: tabindex, cancel with Esc, etc [#3](https://github.com/lolmaus/ember-dialogs/issues/3)
+* Autofocus on the input field [#4](https://github.com/lolmaus/ember-dialogs/issues/4)
 
 
 
