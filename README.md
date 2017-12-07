@@ -52,6 +52,8 @@ Native `alert`, `confirm` and `prompt` functions are very handy and simple to us
 A common solution is to use a custom dialog. Every time you need one, you typically add a duplicate entry like this:
 
 ```handlebars
+{{! before ember-dialogs }}
+
 <button {{action (toggle 'isConfirmDialogOpen' this)}}>
   Do the thing
 </button>
@@ -68,6 +70,8 @@ A common solution is to use a custom dialog. Every time you need one, you typica
 `ember-dialogs` removes the redundancy, reducing the above boilerplate to:
 
 ```handlebars
+{{! with ember-dialogs }}
+
 <button {{action (confirm
   message      = 'Are you sure?'
   actionOk     = (action 'doTheThing')
@@ -81,7 +85,7 @@ Alternatively, you can trigger dialogs programmatically without having to update
 
 ```js
 // Old-school, blocking approach
-if (confirm('Are you sure?') {
+if (confirm('Are you sure?')) {
   this._doTheThing()
 }
 
