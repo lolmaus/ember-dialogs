@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 
-## [1.0.0] - unreleased
+## [1.0.0] - 2017.12.07
 ### Maintenance
 * Upgraded Ember CLI to 2.18.0-beta.1
 * Updated dependencies
@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 * Docs update.
 * Demo update.
 * `package.json` update.
+
 
 
 ## [0.1.0] - 2017.09.18
