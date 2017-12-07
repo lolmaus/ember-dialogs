@@ -1,3 +1,5 @@
+/* eslint-disable ember/no-global-jquery */
+
 import { moduleForComponent, test } from 'ember-qunit'
 import { withChai } from 'ember-cli-chai/qunit'
 import hbs from 'htmlbars-inline-precompile'

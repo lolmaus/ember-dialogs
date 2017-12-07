@@ -10,8 +10,12 @@ module.exports = {
   env: {
     browser: true
   },
+  plugins: [
+    'ember'
+  ],
   extends: [
     "eslint:recommended",
+    'plugin:ember/recommended',
     "standard"
   ],
   "rules": {
@@ -37,4 +41,50 @@ module.exports = {
     "spaced-comment": "off",
     "standard/object-curly-even-spacing": "off",
   },
+  overrides: [
+    // node files
+    {
+      files: [
+        'index.js',
+        'blueprints/ember-dialogs/index.js',
+        'testem.js',
+        'ember-cli-build.js',
+        'config/**/*.js',
+        'tests/dummy/config/**/*.js'
+      ],
+      parserOptions: {
+        sourceType: 'script',
+        ecmaVersion: 2015
+      },
+      env: {
+        browser: false,
+        node: true
+      }
+    },
+
+    // test files
+    {
+      files: ['tests/**/*.js'],
+      excludedFiles: [
+        'tests/dummy/**/*.js',
+        'tests/pages/**/*.js'
+      ],
+      env: {
+        embertest: true
+      },
+      rules: {
+        'no-unused-expressions' : 'off',
+      }
+    },
+    {
+      files: [
+        'tests/dummy/**/*.js',
+        'tests/pages/**/*.js'
+      ],
+      parserOptions: {
+        ecmaVersion: 2017,
+        sourceType: 'module'
+      },
+    },
+  ]
 }
