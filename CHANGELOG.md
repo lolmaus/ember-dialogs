@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 
 
+## [1.1.0] - 2018.03.24
+### New features
+* `ember-dialogs` methods now return promises!
+
+
+
 ## [1.0.0] - 2017.12.07
 ### Maintenance
 * Upgraded Ember CLI to 2.18.0-beta.1

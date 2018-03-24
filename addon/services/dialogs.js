@@ -2,10 +2,12 @@
 import Service from '@ember/service'
 import { reads as writable } from '@ember/object/computed'
 import { defineProperty } from '@ember/object'
+import { next } from '@ember/runloop'
 
 // ----- Ember addon modules -----
 
 // ----- Third-party modules -----
+import RSVP from 'rsvp'
 
 // ----- Own modules -----
 import bind from 'ember-dialogs/-private/macros/bind'
@@ -60,6 +62,8 @@ export default Service.extend({
       blockScrolling    = true,
     } = params
 
+    const userActionDeferred = RSVP.defer(`ember-dialogs: ${message}`)
+
     if (blockScrolling) this._blockScrolling()
 
     this.setProperties({
@@ -78,25 +82,29 @@ export default Service.extend({
 
       backdrop,
       backdropClickable,
+
+      userActionDeferred,
     })
+
+    return userActionDeferred.promise
   },
 
   alert (params) {
-    this.dialog({
+    return this.dialog({
       ...params,
       type : 'alert',
     })
   },
 
   confirm (params) {
-    this.dialog({
+    return this.dialog({
       ...params,
       type : 'confirm',
     })
   },
 
   prompt (params) {
-    this.dialog({
+    return this.dialog({
       ...params,
       type : 'prompt',
     })
@@ -137,6 +145,9 @@ export default Service.extend({
     const actionOk = this.get('actionOk')
     if (actionOk) actionOk(userInput)
 
+    const userActionDeferred = this.get('userActionDeferred')
+    next(() => userActionDeferred.resolve(userInput))
+
     this.reset()
   },
 
@@ -151,6 +162,9 @@ export default Service.extend({
         || this.get('cancelVisible')
       )
     ) actionCancel()
+
+    const userActionDeferred = this.get('userActionDeferred')
+    next(() => userActionDeferred.reject())
 
     this.reset()
   },

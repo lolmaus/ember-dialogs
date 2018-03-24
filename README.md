@@ -124,19 +124,36 @@ export default Component.extend({
   dialogs: service(),
   
   importantValue: false,
+  userDidReject: false,
   
   actions: {
     toggle (value) {
       this.get('dialogs').confirm({
         message: 'Are you sure?',
-        actionOk: () => { this.set('importantValue', value) }, // Use arrow function to keep the scope
+        actionOk:     () => { this.set('importantValue', value) }, // Use arrow function to keep the scope
+        actionCancel: () => { this.set('userDidReject', true) },
       })
     }
   }
 })
 ```
 
-Note: this example uses [modern import paths](https://github.com/ember-cli/ember-rfc176-data).
+Alternatively, you can leverage the fact that `ember-dialogs` methods return a promise:
+
+```js
+    toggle (value) {
+      this
+        .get('dialogs')
+        .confirm({message: 'Are you sure?'})
+        .then(() => { this.set('importantValue', value) })
+        .catch(() => { this.set('userDidReject', true) },
+      })
+    }
+```
+
+
+
+Note: these example use [modern import paths](https://github.com/ember-cli/ember-rfc176-data) available in newer Ember versions.
 
 
 
@@ -343,13 +360,15 @@ assert.ok(confirm.$.offset().top > 100)
 See our [acceptance tests](https://github.com/lolmaus/ember-dialogs/blob/gen-0/tests/acceptance/index-test.js) for some inspiration.
 
 
-## Chained usage
+## Nested usage
+
+:warning: Nested usage is not recommented. Use promise chaining instead, and you won't have to worry about what's mentioned below. 
 
 If you invoke a dialog from another dialog's action, the inner dialog will not show up.
  
 This is because the outer dialog will cleanup after itself and hide the inner dialog immediately after it shows up. The inner dialog doesn't even get to render.
 
-To work around this issue, wrap the inner dialog invocation with `next`. See demo app's [`chain` action](https://github.com/lolmaus/ember-dialogs/blob/gen-0/tests/dummy/app/controllers/index.js).
+To work around this issue, wrap the inner dialog invocation with `next`. See demo app's [`nested` action](https://github.com/lolmaus/ember-dialogs/blob/gen-0/tests/dummy/app/controllers/index.js).
 
 
 

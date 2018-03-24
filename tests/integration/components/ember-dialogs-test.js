@@ -362,23 +362,23 @@ test('prompt block form', withChai(async function (expect) {
         {{#if params.message}}
           <p class="message">{{params.message}}</p>
         {{/if}}
-  
+
         {{#if (eq params.type 'prompt')}}
-          {{input 
+          {{input
             class       = 'input'
             value       = params.userInput
             placeholder = params.placeholder
             enter       = (action params.actionOk params.userInput)
           }}
         {{/if}}
-  
+
         <button
           class = "ok"
           {{action params.actionOk params.userInput}}
         >
           {{params.labelOk}}
         </button>
-  
+
         {{#if params.shouldDisplayCancel}}
           <button
             class = "cancel"
