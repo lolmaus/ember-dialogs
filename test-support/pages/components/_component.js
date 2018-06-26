@@ -41,39 +41,40 @@ export default function component (scope = "", descriptor = {}) {
     descriptor = scope
     scope = null
   }
+  scope = scope ? { scope, itemScope : scope } : {};
 
-  return {
-    ...(scope ? { scope, itemScope : scope } : {}), // inject the scope only if it was provided
+  let object = Object.assign({},descriptor, scope, {
+      scope            : scope,
+      itemScope        : scope,
+      $                : jquery($el => $el),
+      attribute        : attribute(),
+      blur             : jquery($el => $el.blur()),
+      checked          : jquery($el => $el.is(":checked")),
+      click            : clickable(),
+      contains         : jquery($el => selector => $el.find(selector).length > 0, false),
+      disabled         : jquery($el => $el.is("[disabled]")),
+      empty            : jquery($el => $el.is(":empty") || !$el.children().length && !$el.text().trim().length),
+      exists           : jquery($el => $el.length > 0, false), // false: don't spit an error if element isn't found
+      fill             : fillable(),
+      focus            : jquery($el => $el.focus()),
+      index            : jquery($el => $el.index()),
+      hasClass         : jquery($el => className => $el.hasClass(className)),
+      active           : hasClass("active"),
+      disabledViaClass : hasClass("disabled"),
+      visible          : isVisible(),
+      placeholder      : attribute("placeholder"),
+      text             : text(),
+      value            : value(),
 
-    $                : jquery($el => $el),
-    attribute        : attribute(),
-    blur             : jquery($el => $el.blur()),
-    checked          : jquery($el => $el.is(":checked")),
-    click            : clickable(),
-    contains         : jquery($el => selector => $el.find(selector).length > 0, false),
-    disabled         : jquery($el => $el.is("[disabled]")),
-    empty            : jquery($el => $el.is(":empty") || !$el.children().length && !$el.text().trim().length),
-    exists           : jquery($el => $el.length > 0, false), // false: don't spit an error if element isn't found
-    fill             : fillable(),
-    focus            : jquery($el => $el.focus()),
-    index            : jquery($el => $el.index()),
-    hasClass         : jquery($el => className => $el.hasClass(className)),
-    active           : hasClass("active"),
-    disabledViaClass : hasClass("disabled"),
-    visible          : isVisible(),
-    placeholder      : attribute("placeholder"),
-    text             : text(),
-    value            : value(),
+      keyup (code) {
+        const event = new $.Event("keyup")
+        event.which = code
+        event.keyCode = code
+        return this.$.trigger(event)
+      },
+    });
 
-    keyup (code) {
-      const event = new $.Event("keyup")
-      event.which = code
-      event.keyCode = code
-      return this.$.trigger(event)
-    },
-
-    ...descriptor,
-  }
+  return object;
 }
 
 

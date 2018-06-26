@@ -16,7 +16,6 @@ module.exports = {
   extends: [
     "eslint:recommended",
     'plugin:ember/recommended',
-    "standard"
   ],
   "rules": {
     "arrow-parens": ["error", "as-needed"],

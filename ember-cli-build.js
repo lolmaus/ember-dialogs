@@ -7,7 +7,7 @@ module.exports = function (defaults) {
     // Add options here
     babel : {
       plugins : [
-        'transform-object-rest-spread',
+        [require('babel-plugin-transform-object-rest-spread').default],
       ],
     },
 
